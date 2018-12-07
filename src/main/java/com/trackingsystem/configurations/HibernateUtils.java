@@ -1,6 +1,7 @@
 package com.trackingsystem.configurations;
 
 import com.trackingsystem.entities.Project;
+import com.trackingsystem.entities.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -15,6 +16,7 @@ public class HibernateUtils {
         org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration().configure();
 
         configuration.addAnnotatedClass(Project.class);
+        configuration.addAnnotatedClass(User.class);
 
         StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder();
 
