@@ -14,6 +14,6 @@
         <a href="/projects/${project.pattern}/issues">Issues</a> |
         <a href="/projects/${project.pattern}/documents">Documents</a> |
         <a href="/projects/${project.pattern}/settings">Settings</a></div>
-        <div><h3>Issues</h3></div>
+        <div><h3>New Issue</h3></div>
     </body>
 </html>

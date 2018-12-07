@@ -3,13 +3,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <body>
-        <table>
-            <tr>
-                <td>${project.id}</td>
-                <td>${project.name}</td>
-                <td>${project.description}</td>
-                <td><a href="/projects/${project.pattern}/issues">Issues</a></td>
-            </tr>
-        </table>
+        <div><a href="/">Home</a> |
+        <a href="/projects">Projects</a> |
+        <a href="/my/account">My Account</a> |
+        <a href="my/page">My Page</a></div>
+        <br />
+        <div><h2>${project.name}</h2></div>
+        <div><a href="/projects/${project.pattern}">Overview</a> |
+        <a href="/projects/${project.pattern}/issues/new">New Issue</a> |
+        <a href="/projects/${project.pattern}/issues">Issues</a> |
+        <a href="/projects/${project.pattern}/documents">Documents</a> |
+        <a href="/projects/${project.pattern}/settings">Settings</a></div>
+        <div><h3>${project.description}</h3></div>
     </body>
 </html>
