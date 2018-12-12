@@ -19,17 +19,17 @@ public class MvcWebConfig implements WebMvcConfigurer {
     @Autowired
     private ApplicationContext applicationContext;
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-            .addResourceHandler("/static/**")
-            .addResourceLocations("/static/");
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry
+//            .addResourceHandler("/static/**")
+//            .addResourceLocations("/static/");
+//    }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
-        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/login").setViewName("users/login");
     }
 
     @Bean

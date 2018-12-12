@@ -4,7 +4,7 @@
 <html lang="en">
     <h2>Sign up new User</h2>
 
-    <form action="/register" method="post">
+    <form action="/users/register" method="post">
         <label>
             Username:
             <input type="text" name="username"/>

@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
     <body>
-        <div><a href="/">Home</a> |
-        <a href="/projects">Projects</a> |
-        <a href="/my/account">My Account</a> |
-        <a href="/my/page">My Page</a> |
-        <a href="/register">Sign Up</a></div>
+        <div>
+            <jsp:include page="headerNavigation.jsp"/>
+        </div>
         <br />
-        <div><h2>Welcome, Guest!</h2></div>
+        <div>
+            <h2>Welcome, Guest!</h2>
+        </div>
     </body>
 </html>

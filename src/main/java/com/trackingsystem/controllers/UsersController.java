@@ -16,15 +16,15 @@ public class UsersController {
         this.usersService = usersService;
     }
 
-    @GetMapping("/register")
+    @GetMapping("/users/register")
     public String register(Model model) {
         model.addAttribute("user", new User());
-        return "register";
+        return "users/register";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @PostMapping("/users/register")
     public String register(@ModelAttribute User user) {
         usersService.create(user);
-        return "register";
+        return "users/register";
     }
 }
