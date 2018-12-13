@@ -1,6 +1,7 @@
 package com.trackingsystem.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "users")
@@ -8,6 +9,9 @@ public class User {
     private int id;
     private String username;
     private String password;
+    private String email;
+    private boolean enabled;
+    private boolean tokenExpired;
 
     @Column(name = "id")
     @Id
@@ -37,4 +41,11 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 }

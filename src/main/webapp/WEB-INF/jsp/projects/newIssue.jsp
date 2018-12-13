@@ -1,17 +1,12 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<!DOCTYPE html>
-<html lang="en">
-    <body>
-        <div>
-            <jsp:include page="../headerNavigation.jsp"/>
-        </div>
-        <div><h2>${project.name}</h2></div>
-        <div>
-            <jsp:include page="../projectNavigation.jsp"/>
-        </div>
-        <div>
-            <h3>New Issue</h3>
-        </div>
-    </body>
-</html>
+<jsp:include page="../header.jsp"/>
+    <div>
+        <jsp:include page="../headerNavigation.jsp"/>
+    </div>
+    <div><h2>${project.name}</h2></div>
+    <div>
+        <jsp:include page="../projectNavigation.jsp"/>
+    </div>
+    <div>
+        <h3>New Issue</h3>
+    </div>
+<jsp:include page="../footer.jsp"/>

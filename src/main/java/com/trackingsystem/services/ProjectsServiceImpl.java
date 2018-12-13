@@ -1,16 +1,17 @@
 package com.trackingsystem.services;
 
 import com.trackingsystem.entities.Project;
-import com.trackingsystem.repositories.BaseGenericRepository;
+import com.trackingsystem.repositories.base.GenericRepository;
+import com.trackingsystem.services.base.ProjectsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
-public class ProjectsServiceImpl implements BaseProjectService {
+public class ProjectsServiceImpl implements ProjectsService {
 
-    private final BaseGenericRepository<Project> projectRepository;
+    private final GenericRepository<Project> projectRepository;
 
     @Autowired
-    public ProjectsServiceImpl(BaseGenericRepository<Project> projectRepository) {
+    public ProjectsServiceImpl(GenericRepository<Project> projectRepository) {
         this.projectRepository = projectRepository;
     }
 

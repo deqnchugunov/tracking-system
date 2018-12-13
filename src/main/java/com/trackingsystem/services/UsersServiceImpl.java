@@ -1,20 +1,21 @@
 package com.trackingsystem.services;
 
 import com.trackingsystem.entities.User;
-import com.trackingsystem.repositories.BaseGenericRepository;
+import com.trackingsystem.repositories.base.GenericRepository;
+import com.trackingsystem.services.base.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.ArrayList;
 
-public class UsersServiceImpl implements BaseUsersService {
+public class UsersServiceImpl implements UsersService {
 
-    private final BaseGenericRepository<User> usersRepository;
+    private final GenericRepository<User> usersRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsersServiceImpl(BaseGenericRepository<User> usersRepository, PasswordEncoder passwordEncoder) {
+    public UsersServiceImpl(GenericRepository<User> usersRepository, PasswordEncoder passwordEncoder) {
         this.usersRepository = usersRepository;
         this.passwordEncoder = passwordEncoder;
     }

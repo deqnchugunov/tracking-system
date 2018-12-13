@@ -1,0 +1,9 @@
+body {
+    border:20px solid Tomato;
+}
+
+a {
+    font-family: Verdana;
+    font-size: 20px;
+    border:2px solid Tomato;
+}

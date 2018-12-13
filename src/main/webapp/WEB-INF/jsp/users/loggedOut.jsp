@@ -1,5 +1,5 @@
 <jsp:include page="../header.jsp"/>
-    <h2>User registered successfully.</h2>
+    <h2>Logged out successfully.</h2>
     <div>
         <a href="/">Home</a> | <a href="/login">Log in</a>
     </div>

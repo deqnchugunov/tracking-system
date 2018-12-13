@@ -1,8 +1,8 @@
-package com.trackingsystem.repositories;
+package com.trackingsystem.repositories.base;
 
 import java.util.List;
 
-public interface BaseGenericRepository<T> {
+public interface GenericRepository<T> {
     List<T> getAll();
 
     T getById(int id);

@@ -1,5 +1,6 @@
 package com.trackingsystem.repositories;
 
+import com.trackingsystem.repositories.base.GenericRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -8,7 +9,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-public class HibernateRepository<T> implements BaseGenericRepository<T>{
+public class HibernateRepository<T> implements GenericRepository<T> {
 
     private final SessionFactory sessionFactory;
     private Class<T> entityClass;

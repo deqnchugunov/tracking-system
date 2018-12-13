@@ -1,10 +1,10 @@
-package com.trackingsystem.services;
+package com.trackingsystem.services.base;
 
 import com.trackingsystem.entities.Project;
 
 import java.util.List;
 
-public interface BaseProjectService {
+public interface ProjectsService {
     List<Project> getAllProjects();
 
     Project getProjectById(int id);

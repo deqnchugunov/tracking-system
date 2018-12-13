@@ -1,6 +1,6 @@
 package com.trackingsystem.configurations;
 
-import com.trackingsystem.services.BaseUsersService;
+import com.trackingsystem.services.base.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private BaseUsersService usersService;
+    private UsersService usersService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable()
             .authorizeRequests()
-                .antMatchers("/", "/users/**").permitAll()
+                .antMatchers("/", "/users/**", "/static/**").permitAll()
                 .anyRequest().authenticated()
             .and()
                 .formLogin()
@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
             .and()
                 .logout()
-                .logoutSuccessUrl("/loggedOut")
+                .logoutSuccessUrl("/users/loggedOut")
                 .permitAll();
     }
 

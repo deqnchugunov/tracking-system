@@ -2,10 +2,10 @@ package com.trackingsystem.configurations;
 
 import com.trackingsystem.entities.Project;
 import com.trackingsystem.entities.User;
-import com.trackingsystem.repositories.BaseGenericRepository;
+import com.trackingsystem.repositories.base.GenericRepository;
 import com.trackingsystem.repositories.HibernateRepository;
-import com.trackingsystem.services.BaseProjectService;
-import com.trackingsystem.services.BaseUsersService;
+import com.trackingsystem.services.base.ProjectsService;
+import com.trackingsystem.services.base.UsersService;
 import com.trackingsystem.services.ProjectsServiceImpl;
 import com.trackingsystem.services.UsersServiceImpl;
 import org.hibernate.SessionFactory;
@@ -19,7 +19,7 @@ public class AppConfig {
 
     @Bean
     @Autowired
-    BaseGenericRepository<Project> projectGenericRepository(SessionFactory sessionFactory) {
+    GenericRepository<Project> projectGenericRepository(SessionFactory sessionFactory) {
         HibernateRepository<Project> repository = new HibernateRepository<>(sessionFactory);
         repository.setEntityClass(Project.class);
         return repository;
@@ -27,7 +27,7 @@ public class AppConfig {
 
     @Bean
     @Autowired
-    BaseGenericRepository<User> userGenericRepository(SessionFactory sessionFactory) {
+    GenericRepository<User> userGenericRepository(SessionFactory sessionFactory) {
         HibernateRepository<User> repository = new HibernateRepository<>(sessionFactory);
         repository.setEntityClass(User.class);
         return repository;
@@ -35,13 +35,13 @@ public class AppConfig {
 
     @Bean
     @Autowired
-    BaseProjectService projectsService(BaseGenericRepository<Project> projectRepository) {
+    ProjectsService projectsService(GenericRepository<Project> projectRepository) {
         return new ProjectsServiceImpl(projectRepository);
     }
 
     @Bean
     @Autowired
-    BaseUsersService usersService(BaseGenericRepository<User> usersRepository, PasswordEncoder passwordEncoder) {
+    UsersService usersService(GenericRepository<User> usersRepository, PasswordEncoder passwordEncoder) {
         return new UsersServiceImpl(usersRepository, passwordEncoder);
     }
 

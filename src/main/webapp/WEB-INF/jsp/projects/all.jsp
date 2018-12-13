@@ -1,7 +1,5 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<!DOCTYPE html>
-<html lang="en">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:include page="../header.jsp"/>
     <body>
         <div>
             <jsp:include page="../headerNavigation.jsp"/>
@@ -16,5 +14,4 @@
         </c:forEach>
         <br />
         <a href="/projects/new">Add New Project</a>
-    </body>
-</html>
+<jsp:include page="../footer.jsp"/>

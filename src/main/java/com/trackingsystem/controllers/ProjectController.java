@@ -1,8 +1,7 @@
 package com.trackingsystem.controllers;
 
 import com.trackingsystem.entities.Project;
-import com.trackingsystem.services.BaseProjectService;
-import com.trackingsystem.services.ProjectsServiceImpl;
+import com.trackingsystem.services.base.ProjectsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +15,10 @@ import java.util.List;
 @Controller
 public class ProjectController {
 
-    private final BaseProjectService projectsService;
+    private final ProjectsService projectsService;
 
     @Autowired
-    public ProjectController(BaseProjectService projectsService){
+    public ProjectController(ProjectsService projectsService){
         this.projectsService = projectsService;
     }
 
