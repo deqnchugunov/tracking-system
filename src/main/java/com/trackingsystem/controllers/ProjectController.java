@@ -67,7 +67,7 @@ public class ProjectController {
     }
 
     private String createPatternFromProjectName(String projectName) {
-        String pattern = projectName.replace(" ", "-").trim();
+        String pattern = projectName.replace(" ", "-").toLowerCase().trim();
         return pattern;
     }
 }

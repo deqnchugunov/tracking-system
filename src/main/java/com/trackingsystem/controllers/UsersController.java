@@ -25,6 +25,6 @@ public class UsersController {
     @PostMapping("/users/register")
     public String register(@ModelAttribute User user) {
         usersService.create(user);
-        return "users/register";
+        return "users/registered";
     }
 }
