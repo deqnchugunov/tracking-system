@@ -3,17 +3,11 @@ package com.trackingsystem.controllers;
 import com.trackingsystem.entities.User;
 import com.trackingsystem.services.base.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class UsersController {
@@ -35,5 +29,10 @@ public class UsersController {
     public String register(@ModelAttribute User user) {
         usersService.create(user);
         return "users/registered";
+    }
+
+    @GetMapping("/users/loggedOut")
+    public String logout() {
+        return "users/loggedOut";
     }
 }

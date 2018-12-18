@@ -6,16 +6,36 @@ import java.util.Collection;
 @Entity
 @Table(name = "users")
 public class User {
-    private int id;
-    private String username;
-    private String password;
-    private String email;
-    private boolean enabled;
-    private boolean tokenExpired;
 
     @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "email")
+    private String email;
+
+//    @Column(name = "enabled")
+//    private boolean enabled;
+//
+//    @Column(name = "tokenExpired")
+//    private boolean tokenExpired;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
+
+    //
+
     public int getId() {
         return this.id;
     }
@@ -24,7 +44,6 @@ public class User {
         this.id = id;
     }
 
-    @Column(name = "username")
     public String getUsername() {
         return username;
     }
@@ -33,7 +52,6 @@ public class User {
         this.username = username;
     }
 
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -42,10 +60,28 @@ public class User {
         this.password = password;
     }
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+//    public boolean isEnabled() {
+//        return enabled;
+//    }
+//
+//    public void setEnabled(boolean enabled) {
+//        this.enabled = enabled;
+//    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
 }

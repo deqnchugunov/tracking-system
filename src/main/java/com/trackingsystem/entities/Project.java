@@ -5,14 +5,23 @@ import javax.persistence.*;
 @Entity
 @Table(name = "projects")
 public class Project {
-    private int id;
-    private String name;
-    private String pattern;
-    private String description;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    private int id;
+
+    @Column(name = "name", length = 100, nullable = false)
+    private String name;
+
+    @Column(name = "pattern", length = 100, nullable = false)
+    private String pattern;
+
+    @Column(name = "description", length = 255, nullable = true)
+    private String description;
+
+    //
+
     public int getId() {
         return id;
     }
@@ -21,7 +30,6 @@ public class Project {
         this.id = id;
     }
 
-    @Column(name = "name", length = 100, nullable = false)
     public String getName() {
         return name;
     }
@@ -30,7 +38,6 @@ public class Project {
         this.name = name;
     }
 
-    @Column(name = "pattern", length = 100, nullable = false)
     public String getPattern() {
         return pattern;
     }
@@ -39,7 +46,6 @@ public class Project {
         this.pattern = pattern;
     }
 
-    @Column(name = "description", length = 255, nullable = true)
     public String getDescription() {
         return description;
     }

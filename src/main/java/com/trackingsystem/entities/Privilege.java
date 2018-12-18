@@ -7,11 +7,19 @@ import java.util.Collection;
 @Table(name = "privileges")
 public class Privilege {
 
-    private Long id;
-    private String name;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
+
+    @ManyToMany(mappedBy = "privileges")
+    private Collection<Role> roles;
+
+    //
+
     public Long getId() {
         return id;
     }
@@ -28,6 +36,11 @@ public class Privilege {
         this.name = name;
     }
 
-    @ManyToMany(mappedBy = "privileges")
-    private Collection<Role> roles;
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
 }
