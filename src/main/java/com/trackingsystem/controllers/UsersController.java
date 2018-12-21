@@ -1,6 +1,6 @@
 package com.trackingsystem.controllers;
 
-import com.trackingsystem.entities.User;
+import com.trackingsystem.dto.UserDto;
 import com.trackingsystem.services.base.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,13 +21,13 @@ public class UsersController {
 
     @GetMapping("/users/register")
     public String register(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserDto());
         return "users/register";
     }
 
     @PostMapping("/users/register")
-    public String register(@ModelAttribute User user) {
-        usersService.create(user);
+    public String register(@ModelAttribute UserDto userDto) {
+        usersService.create(userDto);
         return "users/registered";
     }
 
@@ -35,4 +35,10 @@ public class UsersController {
     public String logout() {
         return "users/loggedOut";
     }
+
+    @GetMapping("/users/manage")
+    public String mange() {
+        return "users/manage";
+    }
+
 }

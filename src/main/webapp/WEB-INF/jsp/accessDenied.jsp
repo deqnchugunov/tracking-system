@@ -5,12 +5,11 @@
     </div>
     <br />
     <div>
-        <h2>Welcome, ${username}!</h2>
+        <h1>Access Denied.</h1>
+        <h2>Sorry, you do not have permission to view this page.</h2>
     </div>
+    <br />
     <div>
-        <div>user authorities:</div>
-        <c:forEach items="${authorities}" var="authority">
-            <span>${authority}</span><br />
-        </c:forEach>
+        <a href="/">Home</a>
     </div>
 <jsp:include page="footer.jsp"/>

@@ -21,13 +21,13 @@ public class User {
     @Column(name = "email")
     private String email;
 
-//    @Column(name = "enabled")
-//    private boolean enabled;
-//
-//    @Column(name = "tokenExpired")
-//    private boolean tokenExpired;
+    @Column(name = "enabled")
+    private boolean enabled;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @Column(name = "tokenExpired")
+    private boolean tokenExpired;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -68,13 +68,22 @@ public class User {
         this.email = email;
     }
 
-//    public boolean isEnabled() {
-//        return enabled;
-//    }
-//
-//    public void setEnabled(boolean enabled) {
-//        this.enabled = enabled;
-//    }
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isTokenExpired() {
+        return tokenExpired;
+    }
+
+    public void setTokenExpired(boolean tokenExpired) {
+        this.tokenExpired = tokenExpired;
+    }
+
 
     public Collection<Role> getRoles() {
         return roles;
