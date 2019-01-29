@@ -2,8 +2,10 @@ package com.trackingsystem.services;
 
 import com.trackingsystem.dto.UserDto;
 import com.trackingsystem.entities.Privilege;
+import com.trackingsystem.entities.Project;
 import com.trackingsystem.entities.Role;
 import com.trackingsystem.entities.User;
+import com.trackingsystem.repositories.HibernateRepository;
 import com.trackingsystem.repositories.base.GenericRepository;
 import com.trackingsystem.services.base.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,11 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    public List<User> getAllUsers() {
+        return usersRepository.getAll();
+    }
+
+    @Override
     public void create(UserDto userDto) {
         User user = new User();
         user.setUsername(userDto.getUsername());
@@ -66,6 +73,22 @@ public class UsersServiceImpl implements UsersService {
 
         return builder.build();
     }
+
+    public List<User> getAllUsersAssignedToProject(int projectId) {
+        List<User> users = ((HibernateRepository<User>) usersRepository).getAllUsersAssignedToProject(projectId);
+        return users;
+    }
+
+//    public List<User> getAllUsersByProjectId(String id) {
+//        (HibernateRepository<User>) asd = ((HibernateRepository<User>) usersRepository).getAllUserByProjectId(id);
+//                .stream()
+//                .filter(u -> u.get).equals(username))
+//                .findFirst()
+//                .orElse(null);
+//
+//        return asd;
+//    }
+
 
     private List<String> convertRolesToListOfStrings(Collection<Role> roles) {
         List<String> userRoles = new ArrayList<>();

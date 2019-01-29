@@ -1,6 +1,6 @@
 <jsp:include page="../header.jsp"/>
     <h2>Sign up new User</h2>
-    <form action="/users/register" method="post">
+    <form action="/user/register" method="post">
         <label>
             Username:
             <input type="text" name="username"/>

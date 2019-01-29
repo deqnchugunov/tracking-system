@@ -10,35 +10,44 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class UsersController {
+public class UserController {
 
     private final UsersService usersService;
 
     @Autowired
-    public UsersController(UsersService usersService) {
+    public UserController(UsersService usersService) {
         this.usersService = usersService;
     }
 
-    @GetMapping("/users/register")
+    @GetMapping("/user/register")
     public String register(Model model) {
         model.addAttribute("user", new UserDto());
         return "users/register";
     }
 
-    @PostMapping("/users/register")
+    @PostMapping("/user/register")
     public String register(@ModelAttribute UserDto userDto) {
         usersService.create(userDto);
         return "users/registered";
     }
 
-    @GetMapping("/users/loggedOut")
+    @GetMapping("/user/loggedOut")
     public String logout() {
         return "users/loggedOut";
     }
 
-    @GetMapping("/users/manage")
+    @GetMapping("/user/manage")
     public String mange() {
         return "users/manage";
     }
 
+    @GetMapping("/user/account")
+    public String account() {
+        return "users/account";
+    }
+
+    @GetMapping("/user/page")
+    public String page() {
+        return "users/page";
+    }
 }

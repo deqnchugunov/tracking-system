@@ -34,6 +34,13 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_projects",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"))
+    private Collection<Project> projects;
+
     //
 
     public int getId() {
@@ -84,7 +91,6 @@ public class User {
         this.tokenExpired = tokenExpired;
     }
 
-
     public Collection<Role> getRoles() {
         return roles;
     }
@@ -93,4 +99,11 @@ public class User {
         this.roles = roles;
     }
 
+    public Collection<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Collection<Project> projects) {
+        this.projects = projects;
+    }
 }

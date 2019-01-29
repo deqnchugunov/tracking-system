@@ -11,4 +11,5 @@
     <div>
         <h3>Issues</h3>
     </div>
+    <hr />
 <jsp:include page="../footer.jsp"/>

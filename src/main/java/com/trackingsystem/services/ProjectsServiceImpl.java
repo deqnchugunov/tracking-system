@@ -1,6 +1,7 @@
 package com.trackingsystem.services;
 
 import com.trackingsystem.entities.Project;
+import com.trackingsystem.repositories.HibernateRepository;
 import com.trackingsystem.repositories.base.GenericRepository;
 import com.trackingsystem.services.base.ProjectsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class ProjectsServiceImpl implements ProjectsService {
                     .orElse(null);
 
         return project;
+    }
+
+    public List<Project> getAllProjectsAssignedByUser(String user) {
+        List<Project> projects = ((HibernateRepository<Project>) projectRepository).getProjectsByUser(user);
+        return projects;
     }
 
     @Override

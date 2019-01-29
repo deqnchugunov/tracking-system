@@ -1,6 +1,7 @@
 package com.trackingsystem.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "projects")
@@ -19,6 +20,9 @@ public class Project {
 
     @Column(name = "description", length = 255, nullable = true)
     private String description;
+
+    @ManyToMany(mappedBy = "projects")
+    private Collection<User> users;
 
     //
 
@@ -52,5 +56,13 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Collection<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Collection<User> users) {
+        this.users = users;
     }
 }

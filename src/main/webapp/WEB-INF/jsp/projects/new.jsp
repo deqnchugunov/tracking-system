@@ -11,6 +11,6 @@
             <input type="text" name="description"/>
         </label>
         <div>&nbsp;</div>
-        <div><button type="submit">Create</button> | <a href="/projects">Cancel</a></div>
+        <div><button class="btn btn-primary" type="submit">Create</button> | <a href="/projects">Cancel</a></div>
     </form>
 <jsp:include page="../footer.jsp"/>

@@ -9,6 +9,8 @@
         <jsp:include page="../projectNavigation.jsp"/>
     </div>
     <div>
-        <h3>${project.description}</h3>
+        <h3>Overview</h3>
+        <hr />
+        <h4>${project.description}</h4>
     </div>
 <jsp:include page="../footer.jsp"/>

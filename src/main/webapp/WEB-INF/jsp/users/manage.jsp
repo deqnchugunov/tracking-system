@@ -2,8 +2,8 @@
     <div>
         <jsp:include page="../headerNavigation.jsp"/>
     </div>
-    <h1>Manage</h1>
-    <br />
+    <h2>Manage Users</h2>
+    <hr />
     <div>
         <a href="/">Home</a>
     </div>

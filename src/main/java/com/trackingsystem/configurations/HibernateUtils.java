@@ -17,11 +17,10 @@ public class HibernateUtils {
     static {
         org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration().configure();
 
-        configuration.addAnnotatedClass(Project.class);
-        configuration.addAnnotatedClass(User.class);
-
         configuration.addAnnotatedClass(Privilege.class);
+        configuration.addAnnotatedClass(Project.class);
         configuration.addAnnotatedClass(Role.class);
+        configuration.addAnnotatedClass(User.class);
 
         StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder();
 

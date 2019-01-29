@@ -3,17 +3,17 @@
 <div>
     <a href="/">Home</a> |
     <a href="/projects">Projects</a> |
-    <a href="/my/account">My Account</a> |
-    <a href="/my/page">My Page</a> |
+    <a href="/user/account">My Account</a> |
+    <a href="/user/page">My Page</a> |
     <sec:authorize access="hasRole('ROLE_ADMIN')">
-       <a href="/users/manage">Manage Users</a> |
+       <a href="/user/manage">Manage Users</a> |
     </sec:authorize>
 
     <sec:authorize access="isAuthenticated()">
-        <a class="btn btn-primary" href="/logout">Log out</a>
+        <a class="btn btn-default" href="/logout">Log out</a>
     </sec:authorize>
     <sec:authorize access="isAnonymous()">
-       <a class="btn btn-primary" href="/login">Log In</a> |
-       <a class="btn btn-primary" href="/users/register">Sign Up</a>
+       <a class="btn btn-default" href="/login">Log In</a> |
+       <a class="btn btn-default" href="/user/register">Sign Up</a>
     </sec:authorize>
 </div>
