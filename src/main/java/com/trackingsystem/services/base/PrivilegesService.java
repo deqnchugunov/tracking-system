@@ -1,6 +1,6 @@
 package com.trackingsystem.services.base;
 
-import com.trackingsystem.entities.Privilege;
+import com.trackingsystem.persistance.entities.Privilege;
 import java.util.List;
 
 public interface PrivilegesService {

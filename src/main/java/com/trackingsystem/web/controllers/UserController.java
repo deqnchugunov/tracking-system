@@ -1,12 +1,13 @@
-package com.trackingsystem.controllers;
+package com.trackingsystem.web.controllers;
 
-import com.trackingsystem.dto.UserDto;
+import com.trackingsystem.web.dto.UserDto;
 import com.trackingsystem.services.base.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -48,6 +49,11 @@ public class UserController {
 
     @GetMapping("/user/page")
     public String page() {
+        return "users/page";
+    }
+
+    @GetMapping("/user/{username}")
+    public String getUser(@PathVariable String username) {
         return "users/page";
     }
 }

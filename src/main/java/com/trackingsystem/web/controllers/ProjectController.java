@@ -1,7 +1,8 @@
-package com.trackingsystem.controllers;
+package com.trackingsystem.web.controllers;
 
-import com.trackingsystem.entities.Project;
-import com.trackingsystem.entities.User;
+import com.trackingsystem.web.dto.ProjectDto;
+import com.trackingsystem.persistance.entities.Project;
+import com.trackingsystem.persistance.entities.User;
 import com.trackingsystem.services.ProjectsServiceImpl;
 import com.trackingsystem.services.UsersServiceImpl;
 import com.trackingsystem.services.base.ProjectsService;
@@ -31,7 +32,6 @@ public class ProjectController {
 
     @GetMapping("/projects")
     public String all(Model model, Principal principal) {
-//      List<Project> projects = projectsService.getAllUsers();
         List<Project> projects = ((ProjectsServiceImpl) projectsService).getAllProjectsAssignedByUser(principal.getName());
         model.addAttribute("projects", projects);
         return "projects/all";
@@ -59,17 +59,15 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/new")
-    public String newProject(Model model) {
-        Project project = new Project();
-        model.addAttribute("project", project);
+    public String newProject(Model model, Principal principal) {
+        ProjectDto projectDto = new ProjectDto();
+        model.addAttribute("project", projectDto);
         return "projects/new";
     }
 
     @PostMapping("/projects/new")
-    public String newProject(@ModelAttribute Project project) {
-        String pattern = createPatternFromProjectName(project.getName());
-        project.setPattern(pattern);
-        projectsService.createProject(project);
+    public String newProject(@ModelAttribute ProjectDto projectDto) {
+        projectsService.createProject(projectDto);
         return "redirect:/projects";
     }
 
@@ -85,14 +83,46 @@ public class ProjectController {
         Project project = projectsService.getProjectByName(pattern);
         List<User> allUsers = usersService.getAllUsers();
         List<User> assignedUsers = ((UsersServiceImpl) usersService).getAllUsersAssignedToProject(project.getId());
-        model.addAttribute("project", project);
+
+        ProjectDto projectDto = new ProjectDto();
+        projectDto.setName(project.getName());
+        projectDto.setDescription(project.getDescription());
+        projectDto.setPattern(project.getPattern());
+
+        model.addAttribute("project", projectDto);
         model.addAttribute("allUsers", allUsers);
         model.addAttribute("assignedUsers", assignedUsers);
         return "projects/settings";
     }
 
-    private String createPatternFromProjectName(String projectName) {
-        String pattern = projectName.replace(" ", "-").toLowerCase().trim();
-        return pattern;
+    @GetMapping("/projects/{pattern}/users")
+    public String projectGetAssignedUsers(@PathVariable String pattern, Model model) {
+        Project project = projectsService.getProjectByName(pattern);
+        List<User> assignedUsers = ((UsersServiceImpl) usersService).getAllUsersAssignedToProject(project.getId());
+        model.addAttribute("project", project);
+        model.addAttribute("assignedUsers", assignedUsers);
+        return "projects/assignedUsers";
+    }
+
+    @GetMapping("/projects/{pattern}/users/update")
+    public String projectUpdateAssignedUsers(@PathVariable String pattern, Model model) {
+        Project project = projectsService.getProjectByName(pattern);
+        List<User> allUsers = usersService.getAllUsers();
+        List<User> assignedUsers = ((UsersServiceImpl) usersService).getAllUsersAssignedToProject(project.getId());
+        model.addAttribute("project", project);
+        model.addAttribute("allUsers", allUsers);
+        model.addAttribute("assignedUsers", assignedUsers);
+        return "projects/updateAssignedUsers";
+    }
+
+    @PostMapping("/projects/{pattern}/users/update")
+    public String projectPostAssignedUsers(@PathVariable String pattern, Model model) {
+        Project project = projectsService.getProjectByName(pattern);
+        List<User> allUsers = usersService.getAllUsers();
+        List<User> assignedUsers = ((UsersServiceImpl) usersService).getAllUsersAssignedToProject(project.getId());
+        model.addAttribute("project", project);
+        model.addAttribute("allUsers", allUsers);
+        model.addAttribute("assignedUsers", assignedUsers);
+        return "projects/updateAssignedUsers";
     }
 }

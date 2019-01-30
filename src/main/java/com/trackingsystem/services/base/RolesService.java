@@ -1,6 +1,6 @@
 package com.trackingsystem.services.base;
 
-import com.trackingsystem.entities.Role;
+import com.trackingsystem.persistance.entities.Role;
 import java.util.List;
 
 public interface RolesService {

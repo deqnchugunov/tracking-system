@@ -1,7 +1,7 @@
 package com.trackingsystem.repositories;
 
-import com.trackingsystem.entities.Project;
-import com.trackingsystem.entities.User;
+import com.trackingsystem.persistance.entities.Project;
+import com.trackingsystem.persistance.entities.User;
 import com.trackingsystem.repositories.base.GenericRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -98,11 +98,6 @@ public class HibernateRepository<T> implements GenericRepository<T> {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery criteriaQuery = builder.createQuery(getEntityClass());
-
-//        criteriaQuery.from(getEntityClass());
-
         String hql = "SELECT u.id, u.username, u.password, u.email, u.enabled, u.tokenExpired\n" +
                         "FROM users as u\n" +
                         "INNER JOIN users_projects as up\n" +
@@ -113,7 +108,7 @@ public class HibernateRepository<T> implements GenericRepository<T> {
         NativeQuery query = session.createSQLQuery(hql);
         query.addEntity(User.class);
         query.setParameter("projectId", projectId);
-        List entities = query.list();
+        List<T> entities = query.list();
 
         transaction.commit();
         session.close();
@@ -121,20 +116,9 @@ public class HibernateRepository<T> implements GenericRepository<T> {
         return entities;
     }
 
-    public List<Project> getProjectsByUser(String user) {
+    public List<T> getProjectsByUser(String user) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Project> criteriaQuery = builder.createQuery(Project.class);
-
-//        Root<Project> root = criteriaQuery.from(Project.class);
-//        criteriaQuery.select(root); // criteriaQuery.from(Project.class);
-
-//        Query query = session.createQuery(criteriaQuery);
-//        List<Project> entities = query.getResultList();
-
-//        String hql = "select id, name from projects where id = :idProject";
 
         String hql = "SELECT p.id, p.name, p.description, p.pattern\n " +
                 "FROM projects as p\n" +
@@ -146,28 +130,7 @@ public class HibernateRepository<T> implements GenericRepository<T> {
         NativeQuery query = session.createSQLQuery(hql);
         query.addEntity(Project.class);
         query.setParameter("userName", user);;
-        List entities = query.list();
-
-//        List<Project> projects = criteriaQuery("select id, name from Project where id = :idProject").setParameter("idProject", 1).list();
-
-//        List<Project> result = session.createQuery(hql).setParameter("idProject", 1).list();
-
-//        Root<Project> project = criteriaQuery.from(Project.class);
-//
-//        Predicate cond = builder.gt(project.get("id"), 1);
-//
-//        criteriaQuery.where(cond);
-//
-//        TypedQuery<Project> q = session.createQuery(criteriaQuery);
-
-//        Root<Project> project = cq.from(Project.class);
-//        Join<Project, Team> team = project.join(Project_.teams);
-//        Join<Team, League> league = team.join(Team_.league);
-
-//        CriteriaQuery<Project> personCriteria = builder.createQuery(Project.class);
-//        Root<Project> personRoot = personCriteria.from(Project.class);
-//        Join<Project,Order> orders = personRoot.join( Person_.orders );
-//        Join<Order,LineItem> orderLines = orders.join( Order_.lineItems );
+        List<T> entities = query.list();
 
         transaction.commit();
         session.close();

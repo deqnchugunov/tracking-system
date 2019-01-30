@@ -1,4 +1,4 @@
-package com.trackingsystem.controllers;
+package com.trackingsystem.web.controllers;
 
 import com.trackingsystem.services.base.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;

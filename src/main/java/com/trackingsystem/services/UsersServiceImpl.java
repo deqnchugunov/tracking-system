@@ -1,10 +1,9 @@
 package com.trackingsystem.services;
 
-import com.trackingsystem.dto.UserDto;
-import com.trackingsystem.entities.Privilege;
-import com.trackingsystem.entities.Project;
-import com.trackingsystem.entities.Role;
-import com.trackingsystem.entities.User;
+import com.trackingsystem.web.dto.UserDto;
+import com.trackingsystem.persistance.entities.Privilege;
+import com.trackingsystem.persistance.entities.Role;
+import com.trackingsystem.persistance.entities.User;
 import com.trackingsystem.repositories.HibernateRepository;
 import com.trackingsystem.repositories.base.GenericRepository;
 import com.trackingsystem.services.base.UsersService;
@@ -26,9 +25,7 @@ public class UsersServiceImpl implements UsersService {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsersServiceImpl(GenericRepository<User> usersRepository,
-                            GenericRepository<Role> rolesRepository,
-                            PasswordEncoder passwordEncoder) {
+    public UsersServiceImpl(GenericRepository<User> usersRepository, GenericRepository<Role> rolesRepository, PasswordEncoder passwordEncoder) {
         this.usersRepository = usersRepository;
         this.rolesRepository = rolesRepository;
         this.passwordEncoder = passwordEncoder;
@@ -88,7 +85,6 @@ public class UsersServiceImpl implements UsersService {
 //
 //        return asd;
 //    }
-
 
     private List<String> convertRolesToListOfStrings(Collection<Role> roles) {
         List<String> userRoles = new ArrayList<>();

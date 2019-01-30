@@ -1,6 +1,6 @@
 package com.trackingsystem.services;
 
-import com.trackingsystem.entities.Privilege;
+import com.trackingsystem.persistance.entities.Privilege;
 import com.trackingsystem.repositories.base.GenericRepository;
 import com.trackingsystem.services.base.PrivilegesService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.trackingsystem.entities;
+package com.trackingsystem.persistance.entities;
 
 import javax.persistence.*;
 import java.util.Collection;

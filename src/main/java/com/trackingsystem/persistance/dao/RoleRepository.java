@@ -1,6 +1,6 @@
-package com.trackingsystem.entities.dao;
+package com.trackingsystem.persistance.dao;
 
-import com.trackingsystem.entities.Role;
+import com.trackingsystem.persistance.entities.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {

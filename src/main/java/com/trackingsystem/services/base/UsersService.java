@@ -1,7 +1,7 @@
 package com.trackingsystem.services.base;
 
-import com.trackingsystem.dto.UserDto;
-import com.trackingsystem.entities.User;
+import com.trackingsystem.web.dto.UserDto;
+import com.trackingsystem.persistance.entities.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;

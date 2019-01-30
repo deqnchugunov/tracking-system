@@ -1,6 +1,6 @@
 package com.trackingsystem.services;
 
-import com.trackingsystem.entities.Role;
+import com.trackingsystem.persistance.entities.Role;
 import com.trackingsystem.repositories.base.GenericRepository;
 import com.trackingsystem.services.base.RolesService;
 import org.springframework.beans.factory.annotation.Autowired;

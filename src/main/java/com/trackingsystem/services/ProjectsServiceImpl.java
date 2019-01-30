@@ -1,6 +1,7 @@
 package com.trackingsystem.services;
 
-import com.trackingsystem.entities.Project;
+import com.trackingsystem.web.dto.ProjectDto;
+import com.trackingsystem.persistance.entities.Project;
 import com.trackingsystem.repositories.HibernateRepository;
 import com.trackingsystem.repositories.base.GenericRepository;
 import com.trackingsystem.services.base.ProjectsService;
@@ -34,6 +35,9 @@ public class ProjectsServiceImpl implements ProjectsService {
                     .findFirst()
                     .orElse(null);
 
+        ProjectDto projectDto = new ProjectDto();
+        projectDto.setName(project.getName());
+        projectDto.setDescription(project.getDescription());
         return project;
     }
 
@@ -43,7 +47,12 @@ public class ProjectsServiceImpl implements ProjectsService {
     }
 
     @Override
-    public void createProject(Project project) {
+    public void createProject(ProjectDto projectDto) {
+        Project project = new Project();
+        project.setName(projectDto.getName());
+        String pattern = createPatternFromProjectName(projectDto.getName());
+        project.setPattern(pattern);
+        project.setDescription(projectDto.getDescription());
         projectRepository.create(project);
     }
 
@@ -55,5 +64,10 @@ public class ProjectsServiceImpl implements ProjectsService {
     @Override
     public void deleteProject(Project project) {
         projectRepository.delete(project);
+    }
+
+    private String createPatternFromProjectName(String projectName) {
+        String pattern = projectName.replace(" ", "-").toLowerCase().trim();
+        return pattern;
     }
 }

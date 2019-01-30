@@ -1,6 +1,7 @@
 package com.trackingsystem.services.base;
 
-import com.trackingsystem.entities.Project;
+import com.trackingsystem.web.dto.ProjectDto;
+import com.trackingsystem.persistance.entities.Project;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface ProjectsService {
 
     Project getProjectByName(String name);
 
-    void createProject(Project receipt);
+    void createProject(ProjectDto receipt);
 
     void updateProject(Project receipt);
 

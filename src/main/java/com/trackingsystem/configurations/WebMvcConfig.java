@@ -23,14 +23,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
             .addResourceHandler("/static/**")
-            .addResourceLocations("/static/css");
+            .addResourceLocations("/static/");
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/login").setViewName("users/login");
-        //registry.addViewController("/logout").setViewName("users/loggedOut");
+        registry.addViewController("/accessDenied");
     }
 
     @Bean
@@ -38,7 +38,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         InternalResourceViewResolver bean = new InternalResourceViewResolver();
 
         bean.setViewClass(JstlView.class);
-        bean.setPrefix("/WEB-INF/jsp/");
+        bean.setPrefix("/jsp/");
         bean.setSuffix(".jsp");
 
         return bean;

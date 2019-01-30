@@ -5,11 +5,7 @@
     </div>
     <br />
     <div>
-        <h1>Access Denied.</h1>
-        <h2>Sorry, you do not have permission to view this page.</h2>
-    </div>
-    <br />
-    <div>
-        <a href="/">Home</a>
+        <h2>Access Denied.</h2>
+        <h4>Sorry, you do not have the permissions required to view this page.</h4>
     </div>
 <jsp:include page="footer.jsp"/>

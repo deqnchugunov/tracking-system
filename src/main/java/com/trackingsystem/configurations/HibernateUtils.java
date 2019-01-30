@@ -1,9 +1,9 @@
 package com.trackingsystem.configurations;
 
-import com.trackingsystem.entities.Privilege;
-import com.trackingsystem.entities.Project;
-import com.trackingsystem.entities.Role;
-import com.trackingsystem.entities.User;
+import com.trackingsystem.persistance.entities.Privilege;
+import com.trackingsystem.persistance.entities.Project;
+import com.trackingsystem.persistance.entities.Role;
+import com.trackingsystem.persistance.entities.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
