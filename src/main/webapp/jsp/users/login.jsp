@@ -3,11 +3,11 @@
    <form action="/login" method="post">
        <table>
            <tr>
-               <td>User:</td>
+               <td>User</td>
                <td><input type='text' name='username' value=''></td>
            </tr>
            <tr>
-               <td>Password:</td>
+               <td>Password</td>
                <td><input type='text' name='password' /></td>
            </tr>
            <tr>

@@ -9,15 +9,18 @@
         </div>
         <br />
         <form class="form-horizontal" action="/projects/new" method="post">
-             <div class="form-group">
-                <label>Name</label>
-                    <input type="text" name="name"/>
-             </div>
-            <div class="form-group">
-                <label>Description</label>
-                    <input type="text" name="description"/>
-            </div>
-            <div>&nbsp;</div>
-            <div><button class="btn btn-primary" type="submit">Create</button> | <a href="/projects">Cancel</a></div>
+            <table>
+             <tr>
+                 <td>Name</td>
+                 <td><input type="text" name="name"/></td>
+             </tr>
+             <tr>
+                 <td>Description</td>
+                 <td><textarea type="text" name="description"></textarea></td>
+            </tr>
+           <tr>
+               <td><button class="btn btn-primary" type="submit">Create</button> | <a href="/projects">Cancel</a></td>
+            </tr>
+          </table>
         </form>
 <jsp:include page="../footer.jsp"/>

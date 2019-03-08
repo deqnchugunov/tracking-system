@@ -32,9 +32,7 @@
                     <td>${user.email}</td>
                  </tr>
             </c:forEach>
-            <tr>
-                <td><button class="btn btn-primary" name="submit" type="submit">Update</button> | <a class="btn btn-link" href="/projects/${project.pattern}/users">Cancel</a></td>
-            </tr>
         </table>
+        <button class="btn btn-primary" name="submit" type="submit">Update</button> | <a class="btn btn-link" href="/projects/${project.pattern}/users">Cancel</a>
      </form>
 <jsp:include page="../footer.jsp"/>

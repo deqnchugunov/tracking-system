@@ -92,6 +92,16 @@ public class ProjectsServiceImpl implements ProjectsService {
         return false;
     }
 
+    public boolean isProjectExists(String pattern) {
+        Project project = getProjectByName(pattern);
+
+        if (project != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // Helpers
 
     private String createPatternFromProjectName(String projectName) {

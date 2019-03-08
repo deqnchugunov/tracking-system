@@ -32,7 +32,6 @@
              </tr>
         </c:forEach>
     </table>
-    <br />
    <div>
         <a class="btn btn-primary" href="/projects/${project.pattern}/users/update">Edit</a>
    </div>

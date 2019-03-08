@@ -5,7 +5,6 @@ import com.trackingsystem.web.dto.UserDto;
 import com.trackingsystem.persistance.entities.Privilege;
 import com.trackingsystem.persistance.entities.Role;
 import com.trackingsystem.persistance.entities.User;
-import com.trackingsystem.repositories.HibernateRepository;
 import com.trackingsystem.repositories.base.GenericRepository;
 import com.trackingsystem.services.base.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +56,7 @@ public class UsersServiceImpl implements UsersService {
         user.setUsername(userDto.getUsername());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setEmail(userDto.getEmail());
-        user.setRoles(Arrays.asList(getRoleByName("USER")));
+        user.setRoles(Arrays.asList(getRoleByRoleName("USER")));
         user.setEnabled(true);
         user.setTokenExpired(false);
         usersRepository.create(user);
@@ -116,7 +115,7 @@ public class UsersServiceImpl implements UsersService {
         return userRoles;
     }
 
-    private Role getRoleByName(String name) {
+    private Role getRoleByRoleName(String name) {
         return rolesRepository.getAll()
                 .stream()
                 .filter(r ->r.getName().equals(name))
