@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Collection;
 
@@ -21,7 +22,7 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String index(Model model, Principal principal) {
+    public String index(Model model, Principal principal, HttpServletRequest request) {
 
         String username;
         if (principal != null) {
@@ -34,7 +35,9 @@ public class HomeController {
             username = "Guest";
         }
 
-        model.addAttribute("username", username);
+        request.getSession().setAttribute("un", username);
+
+//        model.addAttribute("username", username);
         return "index";
     }
 

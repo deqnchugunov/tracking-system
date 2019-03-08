@@ -2,8 +2,8 @@
 <a href="/projects/${project.pattern}">Overview</a> |
 <a href="/projects/${project.pattern}/issues">Issues</a> |
 <a href="/projects/${project.pattern}/issues/new">New Issue</a> |
-<a href="/projects/${project.pattern}/documents">Documents</a> |
+<a href="/projects/${project.pattern}/documents">Documents</a>
 <sec:authorize access="hasRole('ROLE_ADMIN')">
-    <a href="/projects/${project.pattern}/settings">Settings</a> |
+  | <a href="/projects/${project.pattern}/settings">Settings</a> |
     <a href="/projects/${project.pattern}/users">Assigned Users</a>
 </sec:authorize>

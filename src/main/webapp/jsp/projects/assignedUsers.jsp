@@ -12,15 +12,28 @@
     <div>
         <h3>Assigned Users</h3>
     </div>
-    <hr />
-   <div>
-        <h4>Users Assigned to Project</h4>
-   </div>
-   <c:forEach items="${assignedUsers}" var="assignedUser">
-        <div><a href="/users/${assignedUser.username}">${assignedUser.username}</a></div>
-    </c:forEach>
+   <table class="table">
+     <tr>
+       <th>&nbsp;</th>
+       <th>Name</th>
+       <th>Email</th>
+     </tr>
+        <c:forEach items="${allUsers}" var="user">
+            <c:set var="isChecked" value="false" />
+            <c:forEach items="${assignedUsers}" var="assignedUser">
+                <c:if test="${user.id == assignedUser.id}" >
+                    <c:set var="isChecked" value="true" />
+                </c:if>
+            </c:forEach>
+            <tr>
+                <td><input type="checkbox" name="${user.id}" value="${user.id}" disabled="disabled" <c:if test="${isChecked == true}">checked</c:if>></td>
+                <td>${user.username}</td>
+                <td>${user.email}</td>
+             </tr>
+        </c:forEach>
+    </table>
     <br />
    <div>
-        <a class="btn btn-primary" href="/projects/${project.pattern}/users/update">Update</a>
+        <a class="btn btn-primary" href="/projects/${project.pattern}/users/update">Edit</a>
    </div>
 <jsp:include page="../footer.jsp"/>

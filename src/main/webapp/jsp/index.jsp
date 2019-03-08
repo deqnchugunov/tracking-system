@@ -5,7 +5,7 @@
     </div>
     <br />
     <div>
-        <h2>Welcome, ${username}!</h2>
+        <h2>Welcome, ${un}!</h2>
     </div>
     <div>
         <div>user authorities:</div>

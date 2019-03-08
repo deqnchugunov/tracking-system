@@ -1,5 +1,6 @@
 package com.trackingsystem.services;
 
+import com.trackingsystem.repositories.UserRepository;
 import com.trackingsystem.web.dto.UserDto;
 import com.trackingsystem.persistance.entities.Privilege;
 import com.trackingsystem.persistance.entities.Role;
@@ -21,14 +22,19 @@ import java.util.List;
 public class UsersServiceImpl implements UsersService {
 
     private final GenericRepository<User> usersRepository;
+    private final UserRepository userRepo;
     private final GenericRepository<Role> rolesRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsersServiceImpl(GenericRepository<User> usersRepository, GenericRepository<Role> rolesRepository, PasswordEncoder passwordEncoder) {
+    public UsersServiceImpl(GenericRepository<User> usersRepository,
+                            GenericRepository<Role> rolesRepository,
+                            PasswordEncoder passwordEncoder,
+                            UserRepository userRepo) {
         this.usersRepository = usersRepository;
         this.rolesRepository = rolesRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userRepo = userRepo;
     }
 
     @Override
@@ -71,36 +77,11 @@ public class UsersServiceImpl implements UsersService {
         return builder.build();
     }
 
-    public List<User> getAllUsersAssignedToProject(int projectId) {
-        List<User> users = ((HibernateRepository<User>) usersRepository).getAllUsersAssignedToProject(projectId);
-        return users;
+    public List<User> getUsersAssignedToProject(String projectName) {
+        return userRepo.getUsersAssignedToProject(projectName);
     }
 
-//    public List<User> getAllUsersByProjectId(String id) {
-//        (HibernateRepository<User>) asd = ((HibernateRepository<User>) usersRepository).getAllUserByProjectId(id);
-//                .stream()
-//                .filter(u -> u.get).equals(username))
-//                .findFirst()
-//                .orElse(null);
-//
-//        return asd;
-//    }
-
-    private List<String> convertRolesToListOfStrings(Collection<Role> roles) {
-        List<String> userRoles = new ArrayList<>();
-        for (Role role : roles) {
-            userRoles.add(role.getName());
-        }
-        return userRoles;
-    }
-
-    private Role getRoleByName(String name) {
-        return rolesRepository.getAll()
-                .stream()
-                .filter(r ->r.getName().equals(name))
-                .findFirst()
-                .orElse(null);
-    }
+    // Helpers
 
     public Collection<? extends GrantedAuthority> getAuthorities(Collection<Role> roles) {
         return getGrantedAuthorities(getPrivileges(roles));
@@ -125,5 +106,21 @@ public class UsersServiceImpl implements UsersService {
             authorities.add(new SimpleGrantedAuthority(privilege));
         }
         return authorities;
+    }
+
+    private List<String> convertRolesToListOfStrings(Collection<Role> roles) {
+        List<String> userRoles = new ArrayList<>();
+        for (Role role : roles) {
+            userRoles.add(role.getName());
+        }
+        return userRoles;
+    }
+
+    private Role getRoleByName(String name) {
+        return rolesRepository.getAll()
+                .stream()
+                .filter(r ->r.getName().equals(name))
+                .findFirst()
+                .orElse(null);
     }
 }

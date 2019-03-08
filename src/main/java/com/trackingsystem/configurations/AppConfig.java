@@ -4,6 +4,8 @@ import com.trackingsystem.persistance.entities.Project;
 import com.trackingsystem.persistance.entities.Role;
 import com.trackingsystem.persistance.entities.User;
 import com.trackingsystem.repositories.HibernateRepository;
+import com.trackingsystem.repositories.ProjectRepository;
+import com.trackingsystem.repositories.UserRepository;
 import com.trackingsystem.repositories.base.GenericRepository;
 import com.trackingsystem.services.ProjectsServiceImpl;
 import com.trackingsystem.services.UsersServiceImpl;
@@ -44,16 +46,32 @@ public class AppConfig {
 
     @Bean
     @Autowired
-    ProjectsService projectsService(GenericRepository<Project> projectRepository) {
-        return new ProjectsServiceImpl(projectRepository);
+    ProjectRepository projectRepo(SessionFactory sessionFactory) {
+        return new ProjectRepository(sessionFactory);
+    }
+
+    @Bean
+    @Autowired
+    UserRepository userRepo(SessionFactory sessionFactory) {
+        return new UserRepository(sessionFactory);
+    }
+
+    @Bean
+    @Autowired
+    ProjectsService projectsService(GenericRepository<Project> projectRepository,
+                                    GenericRepository<User> usersRepository,
+                                    ProjectRepository projectRepo,
+                                    UserRepository userRepo) {
+        return new ProjectsServiceImpl(projectRepository, usersRepository, projectRepo, userRepo);
     }
 
     @Bean
     @Autowired
     UsersService usersService(GenericRepository<User> usersRepository,
                               GenericRepository<Role> rolesRepository,
-                              PasswordEncoder passwordEncoder) {
-        return new UsersServiceImpl(usersRepository, rolesRepository, passwordEncoder);
+                              PasswordEncoder passwordEncoder,
+                              UserRepository userRepo) {
+        return new UsersServiceImpl(usersRepository, rolesRepository, passwordEncoder, userRepo);
     }
 
     @Bean

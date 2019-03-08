@@ -7,13 +7,11 @@ import com.trackingsystem.services.ProjectsServiceImpl;
 import com.trackingsystem.services.UsersServiceImpl;
 import com.trackingsystem.services.base.ProjectsService;
 import com.trackingsystem.services.base.UsersService;
+import com.trackingsystem.web.dto.UpdateUsersProjectsDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -32,16 +30,22 @@ public class ProjectController {
 
     @GetMapping("/projects")
     public String all(Model model, Principal principal) {
-        List<Project> projects = ((ProjectsServiceImpl) projectsService).getAllProjectsAssignedByUser(principal.getName());
-        model.addAttribute("projects", projects);
+        List<Project> projectsAssignedToLoggedUser = ((ProjectsServiceImpl) projectsService).getProjectsAssignedToUser(principal.getName());
+        model.addAttribute("projects", projectsAssignedToLoggedUser);
         return "projects/all";
     }
 
     @GetMapping("/projects/{pattern}")
-    public String projectByName(@PathVariable String pattern, Model model) {
-        Project project = projectsService.getProjectByName(pattern);
-        model.addAttribute("project", project);
-        return "projects/details";
+    public String projectByName(@PathVariable String pattern, Model model, Principal principal) {
+        boolean hasAccess = ((ProjectsServiceImpl) projectsService).hasUserAccessToProject(pattern, principal.getName());
+
+        if(hasAccess) {
+            Project project = projectsService.getProjectByName(pattern);
+            model.addAttribute("project", project);
+            return "projects/details";
+        } else {
+            return "accessDenied";
+        }
     }
 
     @GetMapping("/projects/{pattern}/issues")
@@ -60,8 +64,7 @@ public class ProjectController {
 
     @GetMapping("/projects/new")
     public String newProject(Model model, Principal principal) {
-        ProjectDto projectDto = new ProjectDto();
-        model.addAttribute("project", projectDto);
+        model.addAttribute("project", new ProjectDto());
         return "projects/new";
     }
 
@@ -82,7 +85,7 @@ public class ProjectController {
     public String projectSettings(@PathVariable String pattern, Model model) {
         Project project = projectsService.getProjectByName(pattern);
         List<User> allUsers = usersService.getAllUsers();
-        List<User> assignedUsers = ((UsersServiceImpl) usersService).getAllUsersAssignedToProject(project.getId());
+        List<User> assignedUsers = ((UsersServiceImpl) usersService).getUsersAssignedToProject(project.getName());
 
         ProjectDto projectDto = new ProjectDto();
         projectDto.setName(project.getName());
@@ -96,10 +99,18 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/{pattern}/users")
-    public String projectGetAssignedUsers(@PathVariable String pattern, Model model) {
+    public String getAssignedUsers(@PathVariable String pattern, Model model) {
         Project project = projectsService.getProjectByName(pattern);
-        List<User> assignedUsers = ((UsersServiceImpl) usersService).getAllUsersAssignedToProject(project.getId());
-        model.addAttribute("project", project);
+        List<User> allUsers = usersService.getAllUsers();
+        List<User> assignedUsers = ((UsersServiceImpl) usersService).getUsersAssignedToProject(project.getName());
+
+        ProjectDto projectDto = new ProjectDto();
+        projectDto.setName(project.getName());
+        projectDto.setDescription(project.getDescription());
+        projectDto.setPattern(project.getPattern());
+
+        model.addAttribute("project", projectDto);
+        model.addAttribute("allUsers", allUsers);
         model.addAttribute("assignedUsers", assignedUsers);
         return "projects/assignedUsers";
     }
@@ -108,21 +119,25 @@ public class ProjectController {
     public String projectUpdateAssignedUsers(@PathVariable String pattern, Model model) {
         Project project = projectsService.getProjectByName(pattern);
         List<User> allUsers = usersService.getAllUsers();
-        List<User> assignedUsers = ((UsersServiceImpl) usersService).getAllUsersAssignedToProject(project.getId());
-        model.addAttribute("project", project);
+        List<User> assignedUsers = ((UsersServiceImpl) usersService).getUsersAssignedToProject(project.getName());
+
+        ProjectDto projectDto = new ProjectDto();
+        projectDto.setName(project.getName());
+        projectDto.setDescription(project.getDescription());
+        projectDto.setPattern(project.getPattern());
+
+        model.addAttribute("project", projectDto);
         model.addAttribute("allUsers", allUsers);
         model.addAttribute("assignedUsers", assignedUsers);
         return "projects/updateAssignedUsers";
     }
 
     @PostMapping("/projects/{pattern}/users/update")
-    public String projectPostAssignedUsers(@PathVariable String pattern, Model model) {
-        Project project = projectsService.getProjectByName(pattern);
-        List<User> allUsers = usersService.getAllUsers();
-        List<User> assignedUsers = ((UsersServiceImpl) usersService).getAllUsersAssignedToProject(project.getId());
-        model.addAttribute("project", project);
-        model.addAttribute("allUsers", allUsers);
-        model.addAttribute("assignedUsers", assignedUsers);
+    public String projectPostAssignedUsers(@PathVariable String pattern, Model model, @RequestBody String postPayload) {
+        String asd = postPayload;
+        String sad;
+//        UpdateUsersProjectsDto updateUsersProjectsDto = ((ProjectsServiceImpl) projectsService).getProjectAndAssignedUsers(pattern);
+        model.addAttribute("projectAndUsers", asd);
         return "projects/updateAssignedUsers";
     }
 }

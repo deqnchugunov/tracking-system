@@ -12,23 +12,29 @@
     <div>
         <h3>Assigned Users</h3>
     </div>
-    <hr />
-   <div>
-        <h4>Users Assigned to Project</h4>
-    </div>
-    <form class="border border-light p-5" action="/projects/${project.pattern}/settings/update" method="post">
-       <c:forEach items="${allUsers}" var="user">
-           <c:set var="isChecked" value="false" />
-           <c:forEach items="${assignedUsers}" var="assignedUser">
-               <c:if test="${user.id == assignedUser.id}" >
-                   <c:set var="isChecked" value="true" />
-                </c:if>
+    <form action="/projects/${project.pattern}/users/update" method="post">
+       <table class="table">
+         <tr>
+           <th>&nbsp;</th>
+           <th>Name</th>
+           <th>Email</th>
+         </tr>
+            <c:forEach items="${allUsers}" var="user">
+                <c:set var="isChecked" value="false" />
+                <c:forEach items="${assignedUsers}" var="assignedUser">
+                    <c:if test="${user.id == assignedUser.id}" >
+                        <c:set var="isChecked" value="true" />
+                    </c:if>
+                </c:forEach>
+                <tr>
+                    <td><input type="checkbox" name="${user.id}" value="${user.id}" <c:if test="${isChecked == true}">checked</c:if>></td>
+                    <td>${user.username}</td>
+                    <td>${user.email}</td>
+                 </tr>
             </c:forEach>
-            <input type="checkbox" name="${user.id}" value="${user.id}" <c:if test="${isChecked == true}">checked</c:if>>${user.username}<br>
-        </c:forEach>
-        <br />
-       <div>
-           <td><input class="btn btn-primary" name="submit" type="submit" value="Save Changes" /></td> | <a class="btn btn-link" href="/projects/${project.pattern}/users">Cancel</a>
-       </div>
-    </form>
+            <tr>
+                <td><button class="btn btn-primary" name="submit" type="submit">Update</button> | <a class="btn btn-link" href="/projects/${project.pattern}/users">Cancel</a></td>
+            </tr>
+        </table>
+     </form>
 <jsp:include page="../footer.jsp"/>
